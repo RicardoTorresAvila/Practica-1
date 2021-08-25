@@ -1,0 +1,81 @@
+package practica1b;
+
+/**
+ *
+ * @author RICARDO
+ */
+public class Practica1b {
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        Alumno al=null;
+        int op;
+        do
+        {
+            op=0;
+            System.out.println("1) Captura nombre y calificaciones");
+            System.out.println("2) Imprimir calificaciones y promedio");
+            System.out.println("3) Imprimir calificaciones y calificacion mas baja ");
+            System.out.println("4) Imprimir calificaciones y calificacion mas alta");
+            System.out.println("5) salir");
+            while(op <=0 || op>=6 )
+            {
+                op=CapturaDatos.capturarEntero("Selecciona opcion");
+            }
+            switch(op)
+            {
+                case 1 ->{
+                    al=new Alumno(CapturaDatos.capturarCadena("Ingresa nombre"),CapturaDatos.capturarEntero("Introduce matricula"));
+                    for(int i =0; i<5; i++)
+                    {
+                        do{
+                            al.calificaciones[i]=CapturaDatos.capturarFlotante("Ingresa calificacion de rango de 0 a 100"+(i+1));                           
+                        }while (al.calificaciones[i]>100 || al.calificaciones[i]<0);
+                    }
+                    break;
+                }
+                case 2 ->{
+                    for(int i= 0 ;i<5; i++)
+                    {
+                        System.out.printf("Calificacion %d:%f",i,al.calificaciones[i]);
+                        System.out.println();
+                    }
+                    System.out.printf("Promedio:%2f\n",Alumno.getPromedio(al));
+                    break;
+                }
+                case 3->{
+                    float min = al.calificaciones[0];
+                    for(int i = 0;i<5;i++)
+                    {
+                        if(al.calificaciones[i]<min)
+                            min = al.calificaciones[i];
+                        System.out.printf("Calificacion %d:%f",i,al.calificaciones[i]);
+                        System.out.println();                        
+                    }
+                    System.out.printf("Calificacion mas baja %f\n",min);
+                    break;
+                }
+               case 4 -> {
+                    float max = Float.NEGATIVE_INFINITY;
+                    for(int i = 0; i<5;i++)
+                    {
+                        if(al.calificaciones[i] > max)
+                            max = al.calificaciones[i];
+                        System.out.printf("Calificacion %d: %f", i, al.calificaciones[i]);
+                        System.out.println();
+                    }
+                    System.out.printf("Calificacion más alta: %f\n\n", max);
+                    break;
+                }
+               
+            }
+            
+        }while(op!=5);         
+       
+        
+
+    }
+    
+}
